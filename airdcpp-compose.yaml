@@ -1,0 +1,19 @@
+---
+services:
+  airdcpp:
+    image: gangefors/airdcpp-webclient:latest
+    container_name: airdcpp
+    environment:
+      - TZ=Etc/UTC
+      - PUID=1001
+      - PGID=1001
+    volumes:
+      - ./airdcpp:/.airdcpp
+      - ./downloads:/Downloads
+      - ./share:/Share
+    ports:
+      - 5600:5600
+      - 5601:5601
+      - 21248:21248
+      - 21249:21249
+    restart: unless-stopped
