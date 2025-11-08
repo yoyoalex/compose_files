@@ -6,14 +6,50 @@ services:
     environment:
       - TZ=Etc/UTC
       - PUID=1001
-      - PGID=1001
+      - PGID=973
     volumes:
       - ./airdcpp:/.airdcpp
       - ./downloads:/Downloads
       - ./share:/Share
+      - movies:/Share/Movies
+      - tv:/Share/TV
+      - ebooks:/Share/E-Books
+      - training:/Share/Training
+      - music:/Share/Music
     ports:
       - 5600:5600
       - 5601:5601
       - 21248:21248
       - 21249:21249
     restart: unless-stopped
+volumes:
+  movies:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: cifs
+      device: //172.23.1.18/Movies
+      o: addr=172.23.1.18,username=guest,file_mode=0777,dir_mode=0777
+  tv:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: cifs
+      device: //172.23.1.18/TV
+      o: addr=172.23.1.18,username=guest,file_mode=0777,dir_mode=0777
+  training:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: cifs
+      device: //172.23.1.18/Training
+      o: addr=172.23.1.18,username=guest,file_mode=0777,dir_mode=0777
+  ebooks:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: cifs
+      device: //172.23.1.18/E-Books
+      o: addr=172.23.1.18,username=guest,file_mode=0777,dir_mode=0777
+  music:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: cifs
+      device: //172.23.1.18/Music
+      o: addr=172.23.1.18,username=guest,file_mode=0777,dir_mode=0777
