@@ -1,0 +1,10 @@
+services:
+  removarr:
+    container_name: removarr
+    image: tphilippot/removarr:latest
+    build:
+      context: .
+    ports:
+      - 3005:3000
+    volumes:
+      - ./config:/app/config

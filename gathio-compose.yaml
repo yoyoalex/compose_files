@@ -1,0 +1,21 @@
+services:
+    gathio:
+        container_name: gathio-app
+        image: ghcr.io/lowercasename/gathio:latest
+        links:
+            - mongo
+        ports:
+            - 3003:3003
+        volumes:
+            # The path to Gathio's config folder - change to match your system
+            - ./config:/app/config
+            # The path to Gathio's static, public pages including instance description
+            # and privacy policy - change to match your system
+            - ./static:/app/static
+            # The path to Gathio's user-uploaded event images folder - change to match your system
+            - ./images:/app/public/events
+    mongo:
+        container_name: gathio-db
+        image: mongo:latest
+        volumes:
+            - ./mongodb_data_db:/data/db
